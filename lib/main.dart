@@ -15,7 +15,6 @@ void main() async {
   runApp(MyApp());
 }
 
-//cek
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           home: Scaffold(
             body: Center(
-              child: showLoadingWidget(),
+              child: MyWidget().showLoadingWidget(),
             ),
           ),
         );

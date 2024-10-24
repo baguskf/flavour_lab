@@ -21,6 +21,14 @@ class ProfileController extends GetxController {
   var currentUserDate = ''.obs;
   var currentUserPhone = ''.obs;
 
+  var userProfile = {}.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    streamData();
+  }
+
   Stream<DocumentSnapshot<Object?>> streamData() {
     String uid = auth.currentUser!.uid;
     DocumentReference users = data.collection('users').doc(uid);

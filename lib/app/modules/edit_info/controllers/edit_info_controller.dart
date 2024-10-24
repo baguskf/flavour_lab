@@ -94,7 +94,7 @@ class EditInfoController extends GetxController {
     }
 
     if (isNameValid.value && isPhoneValid.value) {
-      confirmationDialog(
+      MyWidget().confirmationDialog(
         title: "Confirm Changes",
         content: "Are you sure you want to update your information?",
         onConfirm: () {
@@ -102,7 +102,7 @@ class EditInfoController extends GetxController {
         },
       );
     } else {
-      customDialog(
+      MyWidget().customDialog(
         title: "Oops!",
         isSuccess: false,
         isLoginDialog: true,
@@ -111,7 +111,7 @@ class EditInfoController extends GetxController {
   }
 
   void updateData(String name, String phone, String date) async {
-    showLoading();
+    MyWidget().showLoading();
     try {
       await data.collection('users').doc(auth.currentUser!.uid).update({
         'name': name,

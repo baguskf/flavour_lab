@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_lab/app/controllers/firebase_service.dart';
 
 import 'package:flavour_lab/app/routes/app_pages.dart';
 import 'package:flavour_lab/app/widget/widget.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final FirebaseFirestore data = FirebaseFirestore.instance;
+  final auth = FirebaseService().auth;
+  final data = FirebaseService().data;
 
   final TextEditingController nameC = TextEditingController();
   final TextEditingController usernameC = TextEditingController();
@@ -126,7 +127,7 @@ class RegisterController extends GetxController {
         !isEmailValid.value ||
         !isPassValid.value ||
         !isCPassValid.value) {
-      customDialog(
+      MyWidget().customDialog(
         title: "Oops!",
         email: null,
         isSuccess: false,
@@ -146,7 +147,7 @@ class RegisterController extends GetxController {
     String password,
     String name,
   ) async {
-    showLoading();
+    MyWidget().showLoading();
 
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
@@ -157,7 +158,7 @@ class RegisterController extends GetxController {
       await userCredential.user!.sendEmailVerification();
 
       Get.back();
-      customDialog(
+      MyWidget().customDialog(
         title: "Verify your email!",
         email: userCredential.user!.email,
         isSuccess: true,
@@ -169,8 +170,8 @@ class RegisterController extends GetxController {
       }
     } on FirebaseAuthException catch (e) {
       Get.back();
-      String errorMessage = getErrorMessage(e.code);
-      customDialog(
+      String errorMessage = MyWidget().getErrorMessage(e.code);
+      MyWidget().customDialog(
         title: "Oops!",
         email: null,
         isSuccess: false,
@@ -188,7 +189,7 @@ class RegisterController extends GetxController {
     }
 
     Get.back();
-    showLoading();
+    MyWidget().showLoading();
     if (user != null && user.emailVerified) {
       String uid = user.uid;
       await data.collection('users').doc(uid).set({

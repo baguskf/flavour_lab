@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_lab/app/colors/colors.dart';
+import 'package:flavour_lab/app/controllers/firebase_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:flavour_lab/app/widget/widget.dart';
 
 class LoginController extends GetxController {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final auth = FirebaseService().auth;
 
   TextEditingController emailC = TextEditingController();
   TextEditingController resetC = TextEditingController();
@@ -88,7 +89,7 @@ class LoginController extends GetxController {
     isPassValid.value = passC.text.isNotEmpty && passC.text.length >= 8;
 
     if (!isEmailValid.value || !isPassValid.value) {
-      customDialog(
+      MyWidget().customDialog(
         title: "Oops!",
         isSuccess: false,
         isLoginDialog: true,
@@ -102,7 +103,7 @@ class LoginController extends GetxController {
   }
 
   void resetPassword(String email) async {
-    showLoading();
+    MyWidget().showLoading();
     try {
       await auth.sendPasswordResetEmail(email: email);
       Get.back();
@@ -119,28 +120,28 @@ class LoginController extends GetxController {
       );
     } on FirebaseAuthException catch (e) {
       Get.back();
-      String errorMessage = getErrorMessage(e.code);
+      String errorMessage = MyWidget().getErrorMessage(e.code);
       Get.snackbar('Oops!', errorMessage);
     }
   }
 
   void loginauth(String email, String password) async {
-    showLoading();
+    MyWidget().showLoading();
     try {
       await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
       Get.back();
-      customDialog(
+      MyWidget().customDialog(
         title: "Login Successful",
         isSuccess: true,
         isLoginDialog: true,
       );
     } on FirebaseAuthException catch (e) {
       Get.back();
-      String errorMessage = getErrorMessage(e.code);
-      customDialog(
+      String errorMessage = MyWidget().getErrorMessage(e.code);
+      MyWidget().customDialog(
         title: "Oops",
         isSuccess: false,
         isLoginDialog: true,

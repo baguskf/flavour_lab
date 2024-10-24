@@ -47,12 +47,16 @@ class ProfileView extends GetView<ProfileController> {
                       alignment: Alignment.center,
                       child: Stack(
                         children: [
-                          const SizedBox(
+                          SizedBox(
                             height: 124,
                             width: 124,
                             child: CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('assets/images/haerin.png'),
+                              backgroundImage: userData["profile_picture"] !=
+                                          null &&
+                                      userData["profile_picture"].isNotEmpty
+                                  ? NetworkImage(userData["profile_picture"])
+                                  : const AssetImage(
+                                      'assets/images/empty_profile.png'),
                             ),
                           ),
                           Positioned(
@@ -381,7 +385,7 @@ class ProfileView extends GetView<ProfileController> {
               ),
             );
           }
-          return Center(child: showLoadingWidget());
+          return Center(child: MyWidget().showLoadingWidget());
         },
       ),
     );

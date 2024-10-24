@@ -1,6 +1,9 @@
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flavour_lab/app/colors/colors.dart';
+import 'package:flavour_lab/app/controllers/firebase_service.dart';
+import 'package:flavour_lab/app/widget/widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -9,6 +12,10 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditPhotoController extends GetxController {
+  final auth = FirebaseService().auth;
+  final data = FirebaseService().data;
+  final storage = FirebaseService().storage;
+
   var image = Rxn<File>();
 
   Future<void> pickImage(ImageSource source) async {
@@ -20,6 +27,66 @@ class EditPhotoController extends GetxController {
       await cropImage(pickedFile.path);
     } else {
       print('No image selected.');
+    }
+  }
+
+  Future<void> uploadImage() async {
+    if (image.value != null) {
+      try {
+        MyWidget().showLoading(); // Tampilkan loading
+
+        String fileName = 'profile_pictures_${auth.currentUser!.email}.jpg';
+        print('Uploading image: ${image.value!.path}'); // Tambahkan log
+        UploadTask uploadTask = storage.ref(fileName).putFile(image.value!);
+        TaskSnapshot snapshot = await uploadTask;
+
+        String downloadUrl = await snapshot.ref.getDownloadURL();
+
+        print('Download URL: $downloadUrl'); // Tambahkan log
+
+        await data.collection('users').doc(auth.currentUser!.uid).update({
+          'profile_picture': downloadUrl,
+        });
+
+        print('Image uploaded and URL saved to Firestore!');
+        Get.back();
+      } catch (e) {
+        print('Error uploading image: $e'); // Log error
+      }
+    } else {
+      print('No image selected');
+    }
+  }
+
+  Future<void> deleteProfilePicture() async {
+    try {
+      // Ambil URL dari Firestore
+      DocumentSnapshot userDoc =
+          await data.collection('users').doc(auth.currentUser!.uid).get();
+
+      if (userDoc.exists && userDoc['profile_picture'] != null) {
+        String profilePictureUrl = userDoc['profile_picture'];
+
+        // Ambil referensi dari Firebase Storage
+        Reference storageRef =
+            FirebaseStorage.instance.refFromURL(profilePictureUrl);
+
+        // Hapus file dari Firebase Storage
+        await storageRef.delete();
+        print('Profile picture deleted from storage.');
+
+        // Hapus URL dari Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(auth.currentUser!.uid)
+            .update({'profile_picture': FieldValue.delete()});
+
+        print('Profile picture URL deleted from Firestore.');
+      } else {
+        print('No profile picture found.');
+      }
+    } catch (e) {
+      print('Error deleting profile picture: $e');
     }
   }
 
@@ -38,6 +105,7 @@ class EditPhotoController extends GetxController {
             statusBarColor: green,
             activeControlsWidgetColor: green,
             lockAspectRatio: true,
+            hideBottomControls: true,
             aspectRatioPresets: [
               CropAspectRatioPreset.square,
             ],
@@ -52,6 +120,9 @@ class EditPhotoController extends GetxController {
       );
       if (croppedFile != null) {
         image.value = File(croppedFile.path);
+        uploadImage();
+      } else {
+        image.value = null;
       }
     }
   }
@@ -137,7 +208,7 @@ class EditPhotoController extends GetxController {
                 ),
                 InkWell(
                   onTap: () {
-                    clearImage();
+                    deleteProfilePicture();
                     Get.back();
                   },
                   child: Column(

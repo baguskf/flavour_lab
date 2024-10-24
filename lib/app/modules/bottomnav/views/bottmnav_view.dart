@@ -25,7 +25,7 @@ class BottmnavView extends GetView<BottomnavController> {
     List<Widget> widgets = [
       const HomeView(),
       const Bookmarkview(),
-      const ProfileView(),
+      ProfileView(),
     ];
 
     return Scaffold(

@@ -16,6 +16,7 @@ class EditPhotoView extends GetView<EditPhotoController> {
       backgroundColor: primary,
       appBar: AppBar(
         title: const Text('Profile photo'),
+        backgroundColor: green,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -33,12 +34,13 @@ class EditPhotoView extends GetView<EditPhotoController> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             Obx(() => controller.image.value == null
-                ? const Text('No image selected.')
+                ? Image.asset('assets/images/empty_profile.png')
                 : Image.file(controller.image.value!)),
-            // ElevatedButton(
-            //     onPressed: () => controller.cropImage(), child: Text('Crop'))
+            const SizedBox(
+              height: 15,
+            ),
           ],
         ),
       ),

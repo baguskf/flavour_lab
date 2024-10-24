@@ -146,6 +146,24 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "firebase_storage",
+      "rootUri": "file:///C:/Users/bgskrf/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage-12.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_storage_platform_interface",
+      "rootUri": "file:///C:/Users/bgskrf/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.31",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_storage_web",
+      "rootUri": "file:///C:/Users/bgskrf/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_storage_web-3.10.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///E:/Flutter/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -398,6 +416,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "shimmer",
+      "rootUri": "file:///C:/Users/bgskrf/AppData/Local/Pub/Cache/hosted/pub.dev/shimmer-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///E:/Flutter/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -494,7 +518,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-10-23T06:56:21.462759Z",
+  "generated": "2024-10-24T08:43:24.707996Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///E:/Flutter/flutter",
