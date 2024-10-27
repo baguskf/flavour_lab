@@ -11,5 +11,21 @@ class FirebaseService {
   final FirebaseFirestore data = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
 
+  Stream<DocumentSnapshot<Object?>> streamData() {
+    String uid = auth.currentUser!.uid;
+    DocumentReference users = data.collection('users').doc(uid);
+    return users.snapshots();
+  }
+
+  Stream<User?> get streamAuth => auth.authStateChanges();
+
+  User? get currentUser => auth.currentUser;
+
+  Future<void> deleteUser() async {
+    if (currentUser != null) {
+      await currentUser!.delete();
+    }
+  }
+
   FirebaseService._internal();
 }

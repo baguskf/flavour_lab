@@ -25,10 +25,10 @@ class BottmnavView extends GetView<BottomnavController> {
     List<Widget> widgets = [
       const HomeView(),
       const Bookmarkview(),
-      ProfileView(),
+      const ProfileView(),
     ];
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Obx(() => widgets[controller.currentIndex.value]),

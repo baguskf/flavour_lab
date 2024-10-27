@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flavour_lab/app/colors/colors.dart';
-import 'package:flavour_lab/app/controllers/auth_controller.dart';
+import 'package:flavour_lab/app/controllers/firebase_service.dart';
 
 import 'package:flavour_lab/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class MyWidget {
-  final authC = Get.find<AuthController>();
+  final auth = FirebaseService().auth;
+
   void showLoading() {
     Get.dialog(
       const Center(
@@ -112,9 +113,9 @@ class MyWidget {
         actions: [
           TextButton(
             onPressed: () async {
-              if (!isLoginDialog && authC.currentUser != null) {
+              if (!isLoginDialog && auth.currentUser != null) {
                 showLoading();
-                await authC.deleteUser();
+                await FirebaseService().deleteUser();
                 Get.back();
               } else if (isLoginDialog && isSuccess) {
                 Get.offAllNamed(Routes.BOTTOM_NAV);

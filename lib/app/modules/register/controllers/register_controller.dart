@@ -195,8 +195,6 @@ class RegisterController extends GetxController {
       await data.collection('users').doc(uid).set({
         'email': user.email,
         'name': name,
-        'date': '-',
-        'phone': '-',
         'createdAt': FieldValue.serverTimestamp(),
       });
       Get.back();

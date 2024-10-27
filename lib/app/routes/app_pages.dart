@@ -4,6 +4,8 @@ import '../modules/bookmark/bindings/favorite_binding.dart';
 import '../modules/bookmark/views/bookmark_view.dart';
 import '../modules/bottomnav/bindings/bottomnav_binding.dart';
 import '../modules/bottomnav/views/bottmnav_view.dart';
+import '../modules/change_password/bindings/change_password_binding.dart';
+import '../modules/change_password/views/change_password_view.dart';
 import '../modules/edit_info/bindings/edit_info_binding.dart';
 import '../modules/edit_info/views/edit_info_view.dart';
 import '../modules/edit_photo/bindings/edit_photo_binding.dart';
@@ -50,13 +52,13 @@ class AppPages {
       binding: RegisterBinding(),
     ),
     GetPage(
-      name: _Paths.HOME_CONTENT,
+      name: _Paths.HOME_VIEW,
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => ProfileView(),
+      page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -73,6 +75,11 @@ class AppPages {
       name: _Paths.EDIT_PHOTO,
       page: () => const EditPhotoView(),
       binding: EditPhotoBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
   ];
 }

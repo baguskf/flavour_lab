@@ -17,6 +17,13 @@ class EditPhotoController extends GetxController {
   final storage = FirebaseService().storage;
 
   var image = Rxn<File>();
+  var currentImage = ''.obs;
+
+  @override
+  void onInit() {
+    fetchImage();
+    super.onInit();
+  }
 
   Future<void> pickImage(ImageSource source) async {
     final picker = ImagePicker();
@@ -33,49 +40,63 @@ class EditPhotoController extends GetxController {
   Future<void> uploadImage() async {
     if (image.value != null) {
       try {
-        MyWidget().showLoading(); // Tampilkan loading
+        MyWidget().showLoading();
 
         String fileName = 'profile_pictures_${auth.currentUser!.email}.jpg';
-        print('Uploading image: ${image.value!.path}'); // Tambahkan log
+        print('Uploading image: ${image.value!.path}');
         UploadTask uploadTask = storage.ref(fileName).putFile(image.value!);
         TaskSnapshot snapshot = await uploadTask;
 
         String downloadUrl = await snapshot.ref.getDownloadURL();
 
-        print('Download URL: $downloadUrl'); // Tambahkan log
+        print('Download URL: $downloadUrl');
 
         await data.collection('users').doc(auth.currentUser!.uid).update({
           'profile_picture': downloadUrl,
         });
 
         print('Image uploaded and URL saved to Firestore!');
+
         Get.back();
       } catch (e) {
-        print('Error uploading image: $e'); // Log error
+        print('Error uploading image: $e');
       }
     } else {
       print('No image selected');
     }
   }
 
-  Future<void> deleteProfilePicture() async {
+  void fetchImage() async {
     try {
-      // Ambil URL dari Firestore
       DocumentSnapshot userDoc =
           await data.collection('users').doc(auth.currentUser!.uid).get();
 
       if (userDoc.exists && userDoc['profile_picture'] != null) {
         String profilePictureUrl = userDoc['profile_picture'];
 
-        // Ambil referensi dari Firebase Storage
+        currentImage.value = profilePictureUrl;
+      } else {
+        print('No profile picture found.');
+      }
+    } catch (e) {
+      print('Error deleting profile picture: $e');
+    }
+  }
+
+  void deleteProfilePicture() async {
+    try {
+      DocumentSnapshot userDoc =
+          await data.collection('users').doc(auth.currentUser!.uid).get();
+
+      if (userDoc.exists && userDoc['profile_picture'] != null) {
+        String profilePictureUrl = userDoc['profile_picture'];
+
         Reference storageRef =
             FirebaseStorage.instance.refFromURL(profilePictureUrl);
 
-        // Hapus file dari Firebase Storage
         await storageRef.delete();
         print('Profile picture deleted from storage.');
 
-        // Hapus URL dari Firestore
         await FirebaseFirestore.instance
             .collection('users')
             .doc(auth.currentUser!.uid)
@@ -209,6 +230,7 @@ class EditPhotoController extends GetxController {
                 InkWell(
                   onTap: () {
                     deleteProfilePicture();
+                    Get.back();
                     Get.back();
                   },
                   child: Column(

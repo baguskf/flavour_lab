@@ -9,12 +9,13 @@ abstract class Routes {
   static const ONBOARDING = _Paths.ONBOARDING;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
-  static const HOME_CONTENT = _Paths.HOME_CONTENT;
+  static const HOME_CONTENT = _Paths.HOME_VIEW;
   static const PROFILE = _Paths.PROFILE;
   static const FAVORITE = _Paths.FAVORITE;
 
   static const EDIT_INFO = _Paths.EDIT_INFO;
   static const EDIT_PHOTO = _Paths.EDIT_PHOTO;
+  static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
 }
 
 abstract class _Paths {
@@ -23,10 +24,11 @@ abstract class _Paths {
   static const ONBOARDING = '/onboarding';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
-  static const HOME_CONTENT = '/home-content';
+  static const HOME_VIEW = '/home-view';
   static const PROFILE = '/profile';
   static const FAVORITE = '/favorite';
 
   static const EDIT_INFO = '/edit-info';
   static const EDIT_PHOTO = '/edit-photo';
+  static const CHANGE_PASSWORD = '/change-password';
 }

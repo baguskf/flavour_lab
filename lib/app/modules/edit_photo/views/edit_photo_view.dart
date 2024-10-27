@@ -15,7 +15,15 @@ class EditPhotoView extends GetView<EditPhotoController> {
     return Scaffold(
       backgroundColor: primary,
       appBar: AppBar(
-        title: const Text('Profile photo'),
+        iconTheme: const IconThemeData(
+          color: white,
+        ),
+        title: const Text(
+          'Profile photo',
+          style: TextStyle(
+            color: white,
+          ),
+        ),
         backgroundColor: green,
         actions: [
           Padding(
@@ -24,7 +32,7 @@ class EditPhotoView extends GetView<EditPhotoController> {
               onTap: () => controller.showImagePicker(),
               child: SvgPicture.asset(
                 'assets/icons/edit.svg',
-                color: Colors.black,
+                color: white,
               ),
             ),
           )
@@ -35,9 +43,18 @@ class EditPhotoView extends GetView<EditPhotoController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(() => controller.image.value == null
-                ? Image.asset('assets/images/empty_profile.png')
-                : Image.file(controller.image.value!)),
+            Obx(
+              () {
+                if (controller.image.value != null) {
+                  return Image.file(controller.image.value!);
+                }
+                if (controller.currentImage.value.isNotEmpty) {
+                  return Image.network(controller.currentImage.value);
+                } else {
+                  return Image.asset('assets/images/empty_profile.png');
+                }
+              },
+            ),
             const SizedBox(
               height: 15,
             ),

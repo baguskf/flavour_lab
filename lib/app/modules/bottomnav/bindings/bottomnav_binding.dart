@@ -1,3 +1,4 @@
+import 'package:flavour_lab/app/modules/home/controllers/home_controller.dart';
 import 'package:flavour_lab/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,10 @@ class BottomNavBinding extends Bindings {
 
     Get.put<ProfileController>(
       ProfileController(),
+    );
+
+    Get.lazyPut<HomeController>(
+      () => HomeController(),
     );
   }
 }

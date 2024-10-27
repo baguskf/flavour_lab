@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flavour_lab/app/colors/colors.dart';
+import 'package:flavour_lab/app/controllers/firebase_service.dart';
 import 'package:flavour_lab/app/routes/app_pages.dart';
 import 'package:flavour_lab/app/widget/widget.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
       backgroundColor: primary,
       body: StreamBuilder<DocumentSnapshot<Object?>>(
-        stream: controller.streamData(),
+        stream: FirebaseService().streamData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             var listAllData = snapshot.data;
@@ -30,13 +31,15 @@ class ProfileView extends GetView<ProfileController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 52.0),
-                      child: Text(
-                        'Profile',
-                        style: TextStyle(
-                          fontFamily: 'myfont',
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: SafeArea(
+                        child: Text(
+                          'Profile',
+                          style: TextStyle(
+                            fontFamily: 'myfont',
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -51,12 +54,28 @@ class ProfileView extends GetView<ProfileController> {
                             height: 124,
                             width: 124,
                             child: CircleAvatar(
-                              backgroundImage: userData["profile_picture"] !=
-                                          null &&
-                                      userData["profile_picture"].isNotEmpty
-                                  ? NetworkImage(userData["profile_picture"])
-                                  : const AssetImage(
-                                      'assets/images/empty_profile.png'),
+                              backgroundColor: white,
+                              child: ClipOval(
+                                child: FadeInImage(
+                                  placeholder: const AssetImage(
+                                    'assets/images/loading_spinner.gif',
+                                  ),
+                                  image: userData["profile_picture"] != null &&
+                                          userData["profile_picture"].isNotEmpty
+                                      ? NetworkImage(
+                                              userData["profile_picture"])
+                                          as ImageProvider
+                                      : const AssetImage(
+                                          'assets/images/empty_profile.png'),
+                                  fit: BoxFit.cover,
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
+                                    return Image.asset(
+                                        'assets/images/empty_profile.png',
+                                        fit: BoxFit.cover);
+                                  },
+                                ),
+                              ),
                             ),
                           ),
                           Positioned(
@@ -166,7 +185,7 @@ class ProfileView extends GetView<ProfileController> {
                         Expanded(
                           child: Text(
                             textAlign: TextAlign.end,
-                            "${userData["phone"]}",
+                            "${userData["phone"] ?? "-"}",
                             style: const TextStyle(
                               fontFamily: 'myfont',
                               fontSize: 16,
@@ -203,7 +222,7 @@ class ProfileView extends GetView<ProfileController> {
                         Expanded(
                           child: Text(
                             textAlign: TextAlign.end,
-                            "${userData["date"]}",
+                            "${userData["date"] ?? "-"}",
                             style: const TextStyle(
                               fontFamily: 'myfont',
                               fontSize: 16,
@@ -229,9 +248,9 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     InkWell(
                       onTap: () => Get.toNamed(Routes.EDIT_INFO, arguments: [
-                        userData["name"],
-                        userData["phone"],
-                        userData["date"]
+                        userData["name"] ?? '-',
+                        userData["phone"] ?? 'No phone number yet.',
+                        userData["date"] ?? 'Tell us your birthday',
                       ]),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,27 +278,30 @@ class ProfileView extends GetView<ProfileController> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/editpass.svg'),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'Change Password',
-                              style: TextStyle(
-                                fontFamily: 'myfont',
-                                fontSize: 16,
-                                color: grey,
+                    InkWell(
+                      onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SvgPicture.asset('assets/icons/editpass.svg'),
+                              const SizedBox(
+                                width: 10,
                               ),
-                            )
-                          ],
-                        ),
-                        SvgPicture.asset('assets/icons/next.svg'),
-                      ],
+                              const Text(
+                                'Change Password',
+                                style: TextStyle(
+                                  fontFamily: 'myfont',
+                                  fontSize: 16,
+                                  color: grey,
+                                ),
+                              )
+                            ],
+                          ),
+                          SvgPicture.asset('assets/icons/next.svg'),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
