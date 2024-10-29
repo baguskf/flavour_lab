@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flavour_lab/app/colors/colors.dart';
 import 'package:flavour_lab/app/controllers/firebase_service.dart';
 
@@ -8,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MyWidget {
   final auth = FirebaseService().auth;
@@ -31,6 +30,86 @@ class MyWidget {
     );
   }
 
+  Widget shimmerWidget() {
+    return SizedBox(
+      height: 250,
+      width: double.infinity,
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 18),
+        scrollDirection: Axis.horizontal,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: SizedBox(
+                    height: 202,
+                    width: 152,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Container(
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: SizedBox(
+                    width: 152,
+                    child: Container(
+                      color: Colors.grey[300],
+                      height: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget shimmerRecomen() {
+    return SizedBox(
+      height: 250,
+      width: double.infinity,
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 18),
+        scrollDirection: Axis.horizontal,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SizedBox(
+                height: 202,
+                width: 255,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Container(
+                    color: Colors.grey[300],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget showLoadingWidget() {
     return const Center(
       child: SizedBox(
@@ -44,6 +123,34 @@ class MyWidget {
           pathBackgroundColor: Colors.transparent,
         ),
       ),
+    );
+  }
+
+  void snackBar(String title, String massage) {
+    Get.snackbar(
+      title,
+      massage,
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: green,
+      colorText: white,
+      duration: const Duration(seconds: 4),
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
+      borderRadius: 10,
+    );
+  }
+
+  void snackReset() {
+    Get.snackbar(
+      'Password reset link sent!',
+      'Please check your email for instructions to reset your password. Make sure to check your spam or junk folder if you don’t see it in your inbox.',
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: green,
+      colorText: white,
+      duration: const Duration(seconds: 6),
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
+      borderRadius: 10,
     );
   }
 
@@ -178,8 +285,8 @@ class MyWidget {
           ),
           TextButton(
             onPressed: () {
-              onConfirm();
               Get.back();
+              onConfirm();
             },
             child: const Text(
               "Confirm",

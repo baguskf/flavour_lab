@@ -107,17 +107,7 @@ class LoginController extends GetxController {
     try {
       await auth.sendPasswordResetEmail(email: email);
       Get.back();
-      Get.snackbar(
-        'Password reset link sent!',
-        'Please check your email for instructions to reset your password. Make sure to check your spam or junk folder if you don’t see it in your inbox.',
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: green,
-        colorText: white,
-        duration: const Duration(seconds: 6),
-        margin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.all(20),
-        borderRadius: 10,
-      );
+      MyWidget().snackReset();
     } on FirebaseAuthException catch (e) {
       Get.back();
       String errorMessage = MyWidget().getErrorMessage(e.code);

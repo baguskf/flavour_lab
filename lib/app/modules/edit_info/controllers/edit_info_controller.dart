@@ -120,9 +120,9 @@ class EditInfoController extends GetxController {
         'phone': phone,
         'date': date,
       });
-      print('Data updated successfully!');
       Get.back();
       Get.back();
+      MyWidget().snackBar("Success", "Data updated successfully!");
     } catch (e) {
       print('Error updating data: $e');
     }

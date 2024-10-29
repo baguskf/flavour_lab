@@ -232,6 +232,17 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                     controller.validatePasswordConfirmation();
                   },
                 )),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () => controller.forgotCurrentPass(),
+                child: const Text(
+                  'Forgot your current password?',
+                  style: TextStyle(
+                      fontFamily: 'myfont', color: green, fontSize: 16),
+                ),
+              ),
+            ),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,7 +275,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                     backgroundColor: green,
                   ),
                   onPressed: () {
-                    // controller.validateAndUpdate();
+                    controller.validate();
                   },
                   child: const Text(
                     'Save',

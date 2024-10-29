@@ -5,4 +5,6 @@ class DataProvider extends GetConnect {
 
   Future<Response> getCategori(String categori) =>
       get("$url/1/filter.php?c=$categori");
+
+  Future<Response> recommendations() => get("$url/1/random.php");
 }

@@ -5,11 +5,15 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   var selectedCategory = 'Beef'.obs;
   var dataCategori = <Meal>[].obs;
+  var dataRecomen = <Meal>[].obs;
+
   var isLoading = false.obs;
+  var isLoadingRecomen = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+    recomendations();
     fetchData(selectedCategory.value);
   }
 
@@ -31,9 +35,35 @@ class HomeController extends GetxController {
         Get.snackbar('Error', 'Failed to fetch users: ${response.statusCode}');
       }
     } catch (e) {
-      // Tangani kesalahan yang mungkin terjadi
       print('ini error nya $e');
       Get.snackbar('Error', 'An error occurred: $e');
+    }
+  }
+
+  void recomendations() async {
+    isLoadingRecomen.value = true;
+    try {
+      List<Future<Response>> futures =
+          List.generate(10, (_) => DataProvider().recommendations());
+      List<Response> responses = await Future.wait(futures);
+
+      List<Meal> allMeals = responses
+          .where((response) =>
+              response.statusCode == 200 && response.bodyString != null)
+          .expand((response) {
+        ListCategoryModel dataModel =
+            listCategoryModelFromJson(response.bodyString!);
+        return dataModel.meals;
+      }).toList();
+
+      isLoadingRecomen.value = false;
+
+      dataRecomen.value = allMeals;
+    } catch (e) {
+      print('ini error nya $e');
+      Get.snackbar('Error', 'An error occurred: $e');
+    } finally {
+      isLoading.value = false;
     }
   }
 
