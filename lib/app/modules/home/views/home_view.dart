@@ -226,12 +226,12 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 28.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Recipe',
                                 style: TextStyle(
                                   fontFamily: 'myfont',
@@ -239,12 +239,17 @@ class HomeView extends GetView<HomeController> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Text(
-                                'See All',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                              InkWell(
+                                onTap: () => Get.toNamed(Routes.SEE_ALL,
+                                    arguments:
+                                        controller.selectedCategory.value),
+                                child: const Text(
+                                  'See All',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ],
@@ -256,7 +261,7 @@ class HomeView extends GetView<HomeController> {
                             return MyWidget().shimmerWidget();
                           }
                           return SizedBox(
-                            height: 250,
+                            height: 260,
                             width: double.infinity,
                             child: ListView.builder(
                               padding: const EdgeInsets.only(left: 18),
@@ -339,76 +344,83 @@ class HomeView extends GetView<HomeController> {
                                     min(10, controller.dataRecomen.length),
                                 itemBuilder: (context, index) {
                                   final data = controller.dataRecomen[index];
-                                  return Stack(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        child: SizedBox(
-                                          height: 202,
-                                          width: 255,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            child: Image.network(
-                                              data.strMealThumb,
-                                              fit: BoxFit.cover,
+                                  return InkWell(
+                                    // onTap: () => Get.toNamed(Routes.SEE_ALL,
+                                    //     arguments:
+                                    //         controller.selectedCategory.value),
+                                    child: Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          child: SizedBox(
+                                            height: 202,
+                                            width: 255,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Image.network(
+                                                data.strMealThumb,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.vertical(
-                                              bottom: Radius.circular(15.0),
-                                            ),
-                                            child: Container(
-                                              height: 202,
-                                              width: 255,
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.bottomCenter,
-                                                  end: Alignment.topCenter,
-                                                  colors: [
-                                                    Colors.black.withOpacity(1),
-                                                    Colors.transparent,
-                                                  ],
+                                        Positioned(
+                                          bottom: 0,
+                                          left: 0,
+                                          right: 0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.vertical(
+                                                bottom: Radius.circular(15.0),
+                                              ),
+                                              child: Container(
+                                                height: 202,
+                                                width: 255,
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    begin:
+                                                        Alignment.bottomCenter,
+                                                    end: Alignment.topCenter,
+                                                    colors: [
+                                                      Colors.black
+                                                          .withOpacity(1),
+                                                      Colors.transparent,
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        bottom: 12,
-                                        left: 12,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: SizedBox(
-                                            width: 200,
-                                            child: Text(
-                                              data.strMeal,
-                                              style: const TextStyle(
-                                                fontFamily: 'myfont',
-                                                fontSize: 16,
-                                                color: white,
-                                                fontWeight: FontWeight.bold,
+                                        Positioned(
+                                          bottom: 12,
+                                          left: 12,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: SizedBox(
+                                              width: 200,
+                                              child: Text(
+                                                data.strMeal,
+                                                style: const TextStyle(
+                                                  fontFamily: 'myfont',
+                                                  fontSize: 16,
+                                                  color: white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    ],
+                                        )
+                                      ],
+                                    ),
                                   );
                                 },
                               ),

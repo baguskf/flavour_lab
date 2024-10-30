@@ -37,7 +37,7 @@ class MyWidget {
       child: ListView.builder(
         padding: const EdgeInsets.only(left: 18),
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: 10,
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -79,6 +79,58 @@ class MyWidget {
     );
   }
 
+  Widget shimmerSeeAll() {
+    return Expanded(
+      child: GridView.builder(
+        padding: const EdgeInsets.only(bottom: 28, left: 28, right: 28),
+        itemCount: 10,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 32,
+          mainAxisSpacing: 15,
+          childAspectRatio: 0.63,
+        ),
+        itemBuilder: (context, index) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: SizedBox(
+                    height: 202,
+                    width: 161,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Container(
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: SizedBox(
+                    width: 152,
+                    child: Container(
+                      color: Colors.grey[300],
+                      height: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget shimmerRecomen() {
     return SizedBox(
       height: 250,
@@ -86,7 +138,7 @@ class MyWidget {
       child: ListView.builder(
         padding: const EdgeInsets.only(left: 18),
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: 10,
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
