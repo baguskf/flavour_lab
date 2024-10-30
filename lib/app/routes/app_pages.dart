@@ -6,6 +6,8 @@ import '../modules/bottomnav/bindings/bottomnav_binding.dart';
 import '../modules/bottomnav/views/bottmnav_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
+import '../modules/detail/bindings/detail_binding.dart';
+import '../modules/detail/views/detail_view.dart';
 import '../modules/edit_info/bindings/edit_info_binding.dart';
 import '../modules/edit_info/views/edit_info_view.dart';
 import '../modules/edit_photo/bindings/edit_photo_binding.dart';
@@ -87,6 +89,11 @@ class AppPages {
       name: _Paths.SEE_ALL,
       page: () => const SeeAllView(),
       binding: SeeAllBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL,
+      page: () => const DetailView(),
+      binding: DetailBinding(),
     ),
   ];
 }

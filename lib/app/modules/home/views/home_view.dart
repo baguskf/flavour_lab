@@ -270,45 +270,50 @@ class HomeView extends GetView<HomeController> {
                                   min(10, controller.dataCategori.length),
                               itemBuilder: (context, index) {
                                 final data = controller.dataCategori[index];
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8),
-                                      child: SizedBox(
-                                        height: 202,
-                                        width: 152,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          child: Image.network(
-                                            data.strMealThumb,
-                                            fit: BoxFit.cover,
+                                return InkWell(
+                                  onTap: () => Get.toNamed(Routes.DETAIL,
+                                      arguments: data.idMeal),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8),
+                                        child: SizedBox(
+                                          height: 202,
+                                          width: 152,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            child: Image.network(
+                                              data.strMealThumb,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 7,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: SizedBox(
-                                        width: 152,
-                                        child: Text(
-                                          data.strMeal,
-                                          style: const TextStyle(
-                                            fontFamily: 'myfont',
-                                            fontSize: 16,
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: SizedBox(
+                                          width: 152,
+                                          child: Text(
+                                            data.strMeal,
+                                            style: const TextStyle(
+                                              fontFamily: 'myfont',
+                                              fontSize: 16,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 );
                               },
                             ),

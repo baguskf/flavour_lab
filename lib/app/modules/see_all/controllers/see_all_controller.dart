@@ -11,7 +11,7 @@ class SeeAllController extends GetxController {
     super.onInit();
     var data = Get.arguments;
     if (data is String) {
-      categori = data; // Mengatur nilai langsung tanpa .value
+      categori = data;
     }
     fetchData(categori);
   }

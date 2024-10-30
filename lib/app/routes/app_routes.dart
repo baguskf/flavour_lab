@@ -17,6 +17,7 @@ abstract class Routes {
   static const EDIT_PHOTO = _Paths.EDIT_PHOTO;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const SEE_ALL = _Paths.SEE_ALL;
+  static const DETAIL = _Paths.DETAIL;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const EDIT_PHOTO = '/edit-photo';
   static const CHANGE_PASSWORD = '/change-password';
   static const SEE_ALL = '/see-all';
+  static const DETAIL = '/detail';
 }

@@ -6,5 +6,8 @@ class DataProvider extends GetConnect {
   Future<Response> getCategori(String categori) =>
       get("$url/1/filter.php?c=$categori");
 
+  Future<Response> getDetail(String mealID) =>
+      get("$url/1/lookup.php?i=$mealID");
+
   Future<Response> recommendations() => get("$url/1/random.php");
 }
