@@ -18,6 +18,7 @@ abstract class Routes {
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const SEE_ALL = _Paths.SEE_ALL;
   static const DETAIL = _Paths.DETAIL;
+  static const VIDEO_TUTORIAL = _Paths.VIDEO_TUTORIAL;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const CHANGE_PASSWORD = '/change-password';
   static const SEE_ALL = '/see-all';
   static const DETAIL = '/detail';
+  static const VIDEO_TUTORIAL = '/video-tutorial';
 }

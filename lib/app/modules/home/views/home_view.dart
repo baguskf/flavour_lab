@@ -350,9 +350,8 @@ class HomeView extends GetView<HomeController> {
                                 itemBuilder: (context, index) {
                                   final data = controller.dataRecomen[index];
                                   return InkWell(
-                                    // onTap: () => Get.toNamed(Routes.SEE_ALL,
-                                    //     arguments:
-                                    //         controller.selectedCategory.value),
+                                    onTap: () => Get.toNamed(Routes.DETAIL,
+                                        arguments: data.idMeal),
                                     child: Stack(
                                       children: [
                                         Padding(

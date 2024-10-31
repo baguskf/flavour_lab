@@ -1,4 +1,5 @@
 import 'package:flavour_lab/app/colors/colors.dart';
+import 'package:flavour_lab/app/routes/app_pages.dart';
 import 'package:flavour_lab/app/widget/widget.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,8 @@ class SeeAllView extends GetView<SeeAllController> {
         children: [
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 28.0, vertical: 28),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -45,9 +47,6 @@ class SeeAllView extends GetView<SeeAllController> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 28,
-          ),
           Obx(() {
             if (controller.isLoading.value) {
               return MyWidget().shimmerSeeAll();
@@ -60,35 +59,39 @@ class SeeAllView extends GetView<SeeAllController> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 32,
                   mainAxisSpacing: 15,
-                  childAspectRatio: 0.63,
+                  childAspectRatio: 0.61,
                 ),
                 itemBuilder: (context, index) {
                   final data = controller.dataCategori[index];
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 202,
-                        width: 161,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.network(
-                            data.strMealThumb,
-                            fit: BoxFit.cover,
+                  return InkWell(
+                    onTap: () =>
+                        Get.toNamed(Routes.DETAIL, arguments: data.idMeal),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 202,
+                          width: 161,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(
+                              data.strMealThumb,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 7),
-                      Text(
-                        data.strMeal,
-                        style: const TextStyle(
-                          fontFamily: 'myfont',
-                          fontSize: 16,
+                        const SizedBox(height: 7),
+                        Text(
+                          data.strMeal,
+                          style: const TextStyle(
+                            fontFamily: 'myfont',
+                            fontSize: 16,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 },
               ),

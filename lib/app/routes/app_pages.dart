@@ -24,6 +24,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/see_all/bindings/see_all_binding.dart';
 import '../modules/see_all/views/see_all_view.dart';
+import '../modules/video_tutorial/bindings/video_tutorial_binding.dart';
+import '../modules/video_tutorial/views/video_tutorial_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -94,6 +96,11 @@ class AppPages {
       name: _Paths.DETAIL,
       page: () => const DetailView(),
       binding: DetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIDEO_TUTORIAL,
+      page: () => const VideoTutorialView(),
+      binding: VideoTutorialBinding(),
     ),
   ];
 }

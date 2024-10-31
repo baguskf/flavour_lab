@@ -19,6 +19,8 @@ class DetailController extends GetxController {
     measures: [],
   ).obs;
 
+  var ingredientImages = <String>[].obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -41,6 +43,10 @@ class DetailController extends GetxController {
 
           if (mealsList.isNotEmpty) {
             dataDetail.value = DetailMeal.fromJson(mealsList[0]);
+
+            // Panggil getImageUrl setelah dataDetail diisi
+            await getImageUrl(dataDetail.value.ingredients);
+            print('Ingredients: ${dataDetail.value.ingredients}');
           } else {
             print('No meals found in response');
           }
@@ -54,6 +60,16 @@ class DetailController extends GetxController {
       isLoading.value = false;
       print('Error: $e');
       Get.snackbar('Error', 'An error occurred: $e');
+    }
+  }
+
+  Future<void> getImageUrl(List<String> ingredients) async {
+    ingredientImages.clear(); // Bersihkan sebelumnya jika ada
+    for (var ingredient in ingredients) {
+      final String imageUrl =
+          "https://www.themealdb.com/images/ingredients/$ingredient.png";
+      print("Fetching image from URL: $imageUrl");
+      ingredientImages.add(imageUrl);
     }
   }
 
@@ -83,6 +99,6 @@ class DetailController extends GetxController {
   }
 
   String getSeeMoreText() {
-    return isExpanded.value ? 'See less' : 'See more';
+    return isExpanded.value ? 'See less' : 'See more....';
   }
 }

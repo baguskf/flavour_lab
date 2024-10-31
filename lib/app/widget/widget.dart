@@ -79,6 +79,8 @@ class MyWidget {
     );
   }
 
+
+
   Widget shimmerSeeAll() {
     return Expanded(
       child: GridView.builder(

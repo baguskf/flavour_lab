@@ -1,4 +1,5 @@
 import 'package:flavour_lab/app/colors/colors.dart';
+import 'package:flavour_lab/app/routes/app_pages.dart';
 import 'package:flavour_lab/app/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -89,7 +90,7 @@ class DetailView extends GetView<DetailController> {
                                 Text(
                                   data.strArea,
                                   style: const TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontFamily: 'myfont',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
@@ -103,12 +104,10 @@ class DetailView extends GetView<DetailController> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
                                 Obx(() {
                                   final instructions =
                                       controller.getDisplayedInstructions();
 
-                                  // Memisahkan string menjadi baris
                                   final instructionLines =
                                       instructions.split('\n');
 
@@ -118,59 +117,184 @@ class DetailView extends GetView<DetailController> {
                                     children: instructionLines.map((line) {
                                       return line.isNotEmpty
                                           ? Row(
-                                              crossAxisAlignment: CrossAxisAlignment
-                                                  .start, // Menyelaraskan teks dengan nomor
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   width: 20,
                                                   child: Text(
+                                                    textAlign: TextAlign.right,
                                                     '${instructionLines.indexOf(line) + 1}. ',
                                                     style: const TextStyle(
-                                                      fontSize: 20,
+                                                      fontSize: 16,
                                                       fontFamily: 'myfont',
                                                       color: grey,
                                                     ),
                                                   ),
                                                 ),
-
                                                 const SizedBox(
                                                   width: 10,
-                                                ), // Menampilkan nomor
+                                                ),
                                                 Expanded(
-                                                    child: Text(
-                                                  line,
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: 'myfont',
-                                                    color: grey,
+                                                  child: Text(
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    line,
+                                                    style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontFamily: 'myfont',
+                                                      color: grey,
+                                                    ),
                                                   ),
-                                                )), // Teks akan mengambil sisa ruang yang tersedia
+                                                ),
                                               ],
                                             )
-                                          : SizedBox(); // Kembalikan widget kosong jika baris kosong
+                                          : const SizedBox();
                                     }).toList(),
                                   );
                                 }),
-                                // Tampilkan 'See more' jika instruksi lebih dari 5 baris
                                 if (data.strInstructions.split('\n').length > 5)
                                   GestureDetector(
                                     onTap: () {
-                                      print(
-                                          'See more tapped'); // Debugging untuk memastikan ini dipanggil
                                       controller.toggleExpanded();
                                     },
                                     child: Obx(() {
-                                      // Gunakan Obx di sini untuk memperbarui teks secara real-time
-                                      return Text(
-                                        controller.getSeeMoreText(),
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: 'myfont',
-                                          color: green,
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 30.0),
+                                        child: Text(
+                                          controller.getSeeMoreText(),
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'myfont',
+                                            color: green,
+                                          ),
                                         ),
                                       );
                                     }),
                                   ),
+                                const SizedBox(height: 20),
+                                const Text(
+                                  'Ingredients',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Column(
+                                  children: List.generate(
+                                    data.ingredients.length,
+                                    (index) {
+                                      final ingredient =
+                                          data.ingredients[index];
+                                      final measure = data.measures[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              height: 47,
+                                              width: 47,
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10)),
+                                              ),
+                                              child: Center(
+                                                child: Obx(
+                                                  () {
+                                                    if (controller
+                                                            .ingredientImages
+                                                            .isNotEmpty &&
+                                                        controller
+                                                                .ingredientImages
+                                                                .length >
+                                                            index) {
+                                                      return Container(
+                                                        height: 47,
+                                                        width: 47,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: grey2,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(10),
+                                                          ),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Image.network(
+                                                            controller
+                                                                    .ingredientImages[
+                                                                index],
+                                                            fit: BoxFit.contain,
+                                                            loadingBuilder:
+                                                                (context, child,
+                                                                    loadingProgress) {
+                                                              if (loadingProgress ==
+                                                                  null) {
+                                                                return child;
+                                                              }
+                                                              return Center(
+                                                                child: MyWidget()
+                                                                    .showLoadingWidget(),
+                                                              );
+                                                            },
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stackTrace) {
+                                                              return const SizedBox(
+                                                                height: 50,
+                                                                child: Text(
+                                                                    "Image not available"),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      return const SizedBox(
+                                                        height: 50,
+                                                        child: Text(
+                                                            "Image not available"),
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                ingredient,
+                                                style: const TextStyle(
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 16),
+                                            Expanded(
+                                              child: Text(
+                                                measure,
+                                                textAlign: TextAlign.right,
+                                                style: const TextStyle(
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                               ],
                             ),
                           ),
@@ -180,6 +304,45 @@ class DetailView extends GetView<DetailController> {
                   ),
                 );
               },
+            ),
+            Positioned(
+              bottom: 30,
+              left: 0,
+              right: 0,
+              child: Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    minimumSize: const Size(158, 39),
+                    backgroundColor: green,
+                  ),
+                  onPressed: () => Get.toNamed(
+                    Routes.VIDEO_TUTORIAL,
+                    arguments: data.strYoutube,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset('assets/icons/playtutor.svg'),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const Text(
+                        'Tutorial video',
+                        style: TextStyle(
+                          fontFamily: 'myfont',
+                          fontSize: 12,
+                          color: white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         );
