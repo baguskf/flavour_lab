@@ -9,5 +9,7 @@ class DataProvider extends GetConnect {
   Future<Response> getDetail(String mealID) =>
       get("$url/1/lookup.php?i=$mealID");
 
+  Future<Response> search(String search) => get("$url/1/search.php?s=$search");
+
   Future<Response> recommendations() => get("$url/1/random.php");
 }

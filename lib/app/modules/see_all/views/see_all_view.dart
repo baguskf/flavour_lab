@@ -12,7 +12,7 @@ class SeeAllView extends GetView<SeeAllController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           SafeArea(
@@ -23,10 +23,13 @@ class SeeAllView extends GetView<SeeAllController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    backgroundColor: white,
+                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
                     child: IconButton(
                       onPressed: () => Get.back(),
-                      icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Theme.of(context).colorScheme.background,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -81,14 +84,16 @@ class SeeAllView extends GetView<SeeAllController> {
                           ),
                         ),
                         const SizedBox(height: 7),
-                        Text(
-                          data.strMeal,
-                          style: const TextStyle(
-                            fontFamily: 'myfont',
-                            fontSize: 16,
+                        Flexible(
+                          child: Text(
+                            data.strMeal,
+                            style: const TextStyle(
+                              fontFamily: 'myfont',
+                              fontSize: 16,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

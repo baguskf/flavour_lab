@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: StreamBuilder<DocumentSnapshot<Object?>>(
         stream: FirebaseService().streamData(),
         builder: (context, snapshot) {
@@ -101,29 +101,32 @@ class HomeView extends GetView<HomeController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 28.0),
                       child: TextField(
+                        onTap: () => Get.toNamed(
+                          Routes.SEARCH_PAGE,
+                        ),
                         cursorColor: grey,
-                        maxLength: 20,
-                        buildCounter: (BuildContext context,
-                            {int? currentLength,
-                            required int? maxLength,
-                            required bool isFocused}) {
-                          return null;
-                        },
+                        readOnly: true,
                         style: const TextStyle(
                           color: grey,
                           fontSize: 16,
                           fontFamily: 'myfont',
                         ),
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: white),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          filled: true, // Pastikan 'filled' diatur ke true
+                          fillColor: Theme.of(context).colorScheme.onPrimary,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15)),
                           ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: white),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15)),
                           ),
                           hintText: 'Looking for a recipe',
                           hintStyle: const TextStyle(
@@ -190,12 +193,17 @@ class HomeView extends GetView<HomeController> {
                                       decoration: BoxDecoration(
                                         color: isSelected
                                             ? Colors.green
-                                            : Colors.white,
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
                                         borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
-                                            color: isSelected
-                                                ? Colors.green
-                                                : Colors.white),
+                                          color: isSelected
+                                              ? Colors.green
+                                              : Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimary,
+                                        ),
                                       ),
                                       child: Column(
                                         mainAxisAlignment:
@@ -206,14 +214,18 @@ class HomeView extends GetView<HomeController> {
                                             width: 45,
                                             height: 35,
                                           ),
-                                          Text(
-                                            category["name"],
-                                            style: TextStyle(
-                                              fontFamily: 'myfont',
-                                              fontSize: 12,
-                                              color: isSelected
-                                                  ? Colors.white
-                                                  : Colors.black,
+                                          Flexible(
+                                            child: Text(
+                                              category["name"],
+                                              style: TextStyle(
+                                                fontFamily: 'myfont',
+                                                fontSize: 12,
+                                                color: isSelected
+                                                    ? white
+                                                    : Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -262,7 +274,6 @@ class HomeView extends GetView<HomeController> {
                           }
                           return SizedBox(
                             height: 260,
-                            width: double.infinity,
                             child: ListView.builder(
                               padding: const EdgeInsets.only(left: 18),
                               scrollDirection: Axis.horizontal,
@@ -276,6 +287,7 @@ class HomeView extends GetView<HomeController> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -293,22 +305,22 @@ class HomeView extends GetView<HomeController> {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 7,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0),
-                                        child: SizedBox(
-                                          width: 152,
-                                          child: Text(
-                                            data.strMeal,
-                                            style: const TextStyle(
-                                              fontFamily: 'myfont',
-                                              fontSize: 16,
+                                      const SizedBox(height: 7),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: SizedBox(
+                                            width: 152,
+                                            child: Text(
+                                              data.strMeal,
+                                              style: const TextStyle(
+                                                fontFamily: 'myfont',
+                                                fontSize: 16,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),
@@ -319,9 +331,6 @@ class HomeView extends GetView<HomeController> {
                             ),
                           );
                         }),
-                        const SizedBox(
-                          height: 5,
-                        ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 28.0),
                           child: Text(

@@ -13,7 +13,7 @@ class EditPhotoView extends GetView<EditPhotoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -25,10 +25,13 @@ class EditPhotoView extends GetView<EditPhotoController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    backgroundColor: white,
+                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
                     child: IconButton(
                       onPressed: () => Get.back(),
-                      icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Theme.of(context).colorScheme.background,
+                      ),
                     ),
                   ),
                   const Expanded(
@@ -47,10 +50,11 @@ class EditPhotoView extends GetView<EditPhotoController> {
                   InkWell(
                     onTap: () => controller.showImagePicker(),
                     child: CircleAvatar(
-                        backgroundColor: white,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
                         child: SvgPicture.asset(
                           'assets/icons/edit.svg',
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.background,
                         )),
                   ),
                 ],

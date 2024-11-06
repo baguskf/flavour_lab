@@ -12,7 +12,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: Column(
@@ -44,16 +44,20 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                 ),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: white),
-                    borderRadius: BorderRadius.all(
+                  fillColor: Theme.of(context).colorScheme.onPrimary,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(15),
                     ),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       )),
                   errorBorder: OutlineInputBorder(
@@ -111,16 +115,20 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    fillColor: Theme.of(context).colorScheme.onPrimary,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: white),
-                        borderRadius: BorderRadius.all(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         )),
                     errorBorder: OutlineInputBorder(
@@ -179,16 +187,20 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    fillColor: Theme.of(context).colorScheme.onPrimary,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: white),
-                        borderRadius: BorderRadius.all(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         )),
                     errorBorder: OutlineInputBorder(
@@ -254,7 +266,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       side: const BorderSide(color: green, width: 2),
                     ),
                     minimumSize: const Size(82, 43),
-                    backgroundColor: primary,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   onPressed: () => Get.back(),
                   child: const Text(

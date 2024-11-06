@@ -19,6 +19,7 @@ abstract class Routes {
   static const SEE_ALL = _Paths.SEE_ALL;
   static const DETAIL = _Paths.DETAIL;
   static const VIDEO_TUTORIAL = _Paths.VIDEO_TUTORIAL;
+  static const SEARCH_PAGE = _Paths.SEARCH_PAGE;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const SEE_ALL = '/see-all';
   static const DETAIL = '/detail';
   static const VIDEO_TUTORIAL = '/video-tutorial';
+  static const SEARCH_PAGE = '/search-page';
 }

@@ -12,7 +12,7 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: SingleChildScrollView(
@@ -50,16 +50,20 @@ class RegisterView extends GetView<RegisterController> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    fillColor: Theme.of(context).colorScheme.onPrimary,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: white),
-                        borderRadius: BorderRadius.all(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         )),
                     errorBorder: OutlineInputBorder(
@@ -109,16 +113,20 @@ class RegisterView extends GetView<RegisterController> {
                     ),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: white),
-                        borderRadius: BorderRadius.all(
+                      fillColor: Theme.of(context).colorScheme.onPrimary,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         ),
                       ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: white),
-                        borderRadius: BorderRadius.all(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         ),
                       ),
@@ -171,16 +179,20 @@ class RegisterView extends GetView<RegisterController> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    fillColor: Theme.of(context).colorScheme.onPrimary,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
@@ -240,16 +252,20 @@ class RegisterView extends GetView<RegisterController> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    fillColor: Theme.of(context).colorScheme.onPrimary,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: white),
-                      borderRadius: BorderRadius.all(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),

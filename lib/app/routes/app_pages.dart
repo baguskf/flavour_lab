@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../modules/bookmark/bindings/favorite_binding.dart';
+import '../modules/bookmark/bindings/bookmark_binding.dart';
 import '../modules/bookmark/views/bookmark_view.dart';
 import '../modules/bottomnav/bindings/bottomnav_binding.dart';
 import '../modules/bottomnav/views/bottmnav_view.dart';
@@ -22,6 +22,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/search_page/bindings/search_page_binding.dart';
+import '../modules/search_page/views/search_page_view.dart';
 import '../modules/see_all/bindings/see_all_binding.dart';
 import '../modules/see_all/views/see_all_view.dart';
 import '../modules/video_tutorial/bindings/video_tutorial_binding.dart';
@@ -101,6 +103,11 @@ class AppPages {
       name: _Paths.VIDEO_TUTORIAL,
       page: () => const VideoTutorialView(),
       binding: VideoTutorialBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH_PAGE,
+      page: () => const SearchPageView(),
+      binding: SearchPageBinding(),
     ),
   ];
 }

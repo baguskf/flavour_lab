@@ -38,7 +38,7 @@ class BottmnavView extends GetView<BottomnavController> {
               height: 63,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
                 boxShadow: const [
                   BoxShadow(
                     color: Color(0x40000000),
@@ -53,7 +53,7 @@ class BottmnavView extends GetView<BottomnavController> {
                     const BorderRadius.vertical(top: Radius.circular(15)),
                 child: Obx(
                   () => BottomNavigationBar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
                     type: BottomNavigationBarType.fixed,
                     currentIndex: controller.currentIndex.value,
                     selectedItemColor: green,
@@ -77,7 +77,7 @@ class BottmnavView extends GetView<BottomnavController> {
                           icons[0],
                           color: controller.currentIndex == 0
                               ? green
-                              : Colors.black,
+                              : Theme.of(context).colorScheme.background,
                           width: 24,
                           height: 24,
                         ),
@@ -88,7 +88,7 @@ class BottmnavView extends GetView<BottomnavController> {
                           icons[1],
                           color: controller.currentIndex == 1
                               ? green
-                              : Colors.black,
+                              : Theme.of(context).colorScheme.background,
                           width: 24,
                           height: 24,
                         ),
@@ -98,7 +98,7 @@ class BottmnavView extends GetView<BottomnavController> {
                         icon: SvgPicture.asset(icons[2],
                             color: controller.currentIndex == 2
                                 ? green
-                                : Colors.black,
+                                : Theme.of(context).colorScheme.background,
                             width: 24,
                             height: 24),
                         label: 'Profile',

@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -33,8 +32,8 @@ class VideoTutorialController extends GetxController {
 
   void exitFullScreen() {
     if (isFullScreen.value) {
-      player.toggleFullScreenMode(); // Keluar dari fullscreen
-      isFullScreen.value = false; // Set isFullScreen menjadi false
+      player.toggleFullScreenMode();
+      isFullScreen.value = false;
     }
   }
 

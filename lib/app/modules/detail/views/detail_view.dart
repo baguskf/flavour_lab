@@ -30,20 +30,31 @@ class DetailView extends GetView<DetailController> {
               top: 50,
               left: 28,
               child: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
                 child: IconButton(
                   onPressed: () => Get.back(),
-                  icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    color: Theme.of(context).colorScheme.background,
+                  ),
                 ),
               ),
             ),
             Positioned(
               top: 50,
               right: 28,
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: SvgPicture.asset('assets/icons/addBookmark.svg'),
-              ),
+              child: Obx(() => InkWell(
+                    onTap: () => controller.togglesSave(),
+                    child: CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        child: controller.isSaved.value
+                            ? SvgPicture.asset('assets/icons/saved.svg')
+                            : SvgPicture.asset(
+                                'assets/icons/addBookmark.svg',
+                                color: Theme.of(context).colorScheme.background,
+                              )),
+                  )),
             ),
             DraggableScrollableSheet(
               initialChildSize: 0.56,
@@ -51,9 +62,9 @@ class DetailView extends GetView<DetailController> {
               maxChildSize: 0.88,
               builder: (context, scrollController) {
                 return Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                     ),
@@ -293,7 +304,7 @@ class DetailView extends GetView<DetailController> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 100,
                                 ),
                               ],
                             ),

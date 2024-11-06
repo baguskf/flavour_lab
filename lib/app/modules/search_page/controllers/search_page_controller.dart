@@ -1,26 +1,18 @@
 import 'package:flavour_lab/app/data/data_provider.dart';
 import 'package:flavour_lab/app/data/model_categori.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SeeAllController extends GetxController {
-  String categori = '';
+class SearchPageController extends GetxController {
+  final TextEditingController searchC = TextEditingController();
+
   var isLoading = false.obs;
   var dataCategori = <Meal>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    var data = Get.arguments;
-    if (data is String) {
-      categori = data;
-    }
-    fetchData(categori);
-  }
-
-  void fetchData(String categori) async {
+  void searchRecipe(String search) async {
     isLoading.value = true;
     try {
-      final response = await DataProvider().getCategori(categori);
+      final response = await DataProvider().search(search);
       isLoading.value = false;
 
       if (response.statusCode == 200) {

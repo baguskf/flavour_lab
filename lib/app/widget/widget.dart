@@ -79,8 +79,6 @@ class MyWidget {
     );
   }
 
-
-
   Widget shimmerSeeAll() {
     return Expanded(
       child: GridView.builder(
@@ -266,6 +264,7 @@ class MyWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 15,
+                color: primarydark,
                 fontFamily: 'myfont',
               ),
             ),
@@ -324,6 +323,7 @@ class MyWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 15,
+            color: primarydark,
             fontFamily: 'myfont',
           ),
         ),

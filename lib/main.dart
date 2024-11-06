@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flavour_lab/app/colors/colors.dart';
 import 'package:flavour_lab/app/controllers/auth_controller.dart';
 import 'package:flavour_lab/app/widget/widget.dart';
 
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           return GetMaterialApp(
             title: "Application",
+            theme: lightTheme,
+            darkTheme: darkTheme,
             initialRoute:
                 snapshot.data != null ? Routes.BOTTOM_NAV : Routes.ONBOARDING,
             getPages: AppPages.routes,

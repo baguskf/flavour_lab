@@ -13,13 +13,13 @@ class VideoTutorialView extends GetView<VideoTutorialController> {
     return Obx(() => WillPopScope(
           onWillPop: () async {
             if (controller.isFullScreen.value) {
-              controller.exitFullScreen(); // Keluar dari fullscreen
-              return false; // Jangan kembali ke halaman sebelumnya
+              controller.exitFullScreen();
+              return false;
             }
-            return true; // Jika sudah di mode normal, lanjutkan kembali
+            return true;
           },
           child: Scaffold(
-            backgroundColor: Colors.white, // Ganti dengan warna yang sesuai
+            backgroundColor: Colors.white,
             body: Column(
               children: [
                 if (!controller.isFullScreen.value) ...[
@@ -31,11 +31,10 @@ class VideoTutorialView extends GetView<VideoTutorialController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CircleAvatar(
-                            backgroundColor: Colors.white, // Ganti sesuai warna
+                            backgroundColor: Colors.white,
                             child: IconButton(
                               onPressed: () {
-                                controller
-                                    .exitFullScreen(); // Keluar dari fullscreen jika perlu
+                                controller.exitFullScreen();
                                 Get.back();
                               },
                               icon:
@@ -65,9 +64,6 @@ class VideoTutorialView extends GetView<VideoTutorialController> {
                   child: YoutubePlayer(
                     controller: controller.player,
                     showVideoProgressIndicator: true,
-                    onReady: () {
-                      print('Player is ready.');
-                    },
                   ),
                 ),
               ],

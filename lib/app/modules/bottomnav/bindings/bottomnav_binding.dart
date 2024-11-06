@@ -1,3 +1,4 @@
+import 'package:flavour_lab/app/modules/bookmark/controllers/bookmark_controller.dart';
 import 'package:flavour_lab/app/modules/home/controllers/home_controller.dart';
 import 'package:flavour_lab/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,10 @@ class BottomNavBinding extends Bindings {
 
     Get.lazyPut<HomeController>(
       () => HomeController(),
+    );
+
+    Get.lazyPut<BookmarkController>(
+      () => BookmarkController(),
     );
   }
 }

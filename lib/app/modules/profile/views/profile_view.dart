@@ -17,7 +17,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: StreamBuilder<DocumentSnapshot<Object?>>(
         stream: FirebaseService().streamData(),
         builder: (context, snapshot) {
@@ -271,7 +271,8 @@ class ProfileView extends GetView<ProfileController> {
                               )
                             ],
                           ),
-                          SvgPicture.asset('assets/icons/next.svg'),
+                          Flexible(
+                              child: SvgPicture.asset('assets/icons/next.svg')),
                         ],
                       ),
                     ),
