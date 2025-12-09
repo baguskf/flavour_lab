@@ -26,14 +26,28 @@ class OnboardingView extends GetView<OnboardingController> {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 116),
-                child: Text(
-                  'FavorLab',
-                  style: TextStyle(
-                    fontFamily: 'myfont',
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: white,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Favor',
+                      style: TextStyle(
+                        fontFamily: 'myfont',
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: white,
+                      ),
+                    ),
+                    Text(
+                      'Lab',
+                      style: TextStyle(
+                        fontFamily: 'myfont',
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: green,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const Text(

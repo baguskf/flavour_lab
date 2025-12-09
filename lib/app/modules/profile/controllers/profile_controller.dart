@@ -27,23 +27,17 @@ class ProfileController extends GetxController {
 
   void toggleDarkMode(bool isDark) async {
     isDarkMode.value = isDark;
-    // Simpan status tema
     await themeService.saveThemeMode(isDark);
-
-    if (isDark) {
-      Get.changeTheme(darkTheme); // Ganti ke tema gelap
-    } else {
-      Get.changeTheme(lightTheme); // Ganti ke tema terang
-    }
+    Get.changeThemeMode(isDark ? ThemeMode.dark : ThemeMode.light);
   }
 
   Future<void> loadThemeMode() async {
     bool isDark = await themeService.getThemeMode();
     isDarkMode.value = isDark;
     if (isDark) {
-      Get.changeTheme(darkTheme); // Ganti ke tema gelap
+      Get.changeTheme(darkTheme);
     } else {
-      Get.changeTheme(lightTheme); // Ganti ke tema terang
+      Get.changeTheme(lightTheme);
     }
   }
 
